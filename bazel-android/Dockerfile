@@ -2,11 +2,18 @@ FROM ubuntu:20.04
 
 RUN apt update
 
-RUN apt -y install curl wget gnupg
+#Add basic packages required to install bazel and dotnet repo
+RUN apt -y install curl wget gnupg apt-transport-https
 
+#Add bazel repo
 COPY bazel.list /etc/apt/sources.list.d/bazel.list
 RUN wget https://bazel.build/bazel-release.pub.gpg 
 RUN apt-key add bazel-release.pub.gpg
+
+#Add dotnet repo
+RUN wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+RUN dpkg -i packages-microsoft-prod.deb
+
 RUN apt update
 
 RUN apt -y install openjdk-8-jdk
@@ -14,6 +21,8 @@ RUN apt -y install python3-numpy python3-pip python3-future python-is-python3
 RUN apt -y install android-sdk
 RUN apt -y install build-essential cmake git
 RUN apt -y upgrade
+
+RUN apt -y install dotnet-sdk-3.1 aspnetcore-runtime-3.1
 
 RUN apt -y install bazel=3.1.0
 
