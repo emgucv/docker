@@ -19,7 +19,7 @@ RUN apt update
 RUN apt -y install openjdk-8-jdk
 RUN apt -y install python3-numpy python3-pip python3-future python-is-python3
 RUN apt -y install android-sdk
-RUN apt -y install build-essential cmake git
+RUN apt -y install build-essential cmake git protobuf-compiler libprotobuf-dev
 RUN apt -y upgrade
 
 RUN apt -y install dotnet-sdk-3.1 aspnetcore-runtime-3.1
@@ -34,3 +34,7 @@ RUN /var/lib/tools/bin/sdkmanager --sdk_root=/usr/lib/android-sdk "ndk;20.1.5948
 RUN /var/lib/tools/bin/sdkmanager --sdk_root=/usr/lib/android-sdk "platforms;android-23"
 
 RUN mkdir /tmp/build_output
+
+# Set the Environment Variable for the DOTNET CLI HOME PATH
+ARG dotnet_cli_home_arg=/tmp/
+ENV DOTNET_CLI_HOME=$dotnet_cli_home_arg
