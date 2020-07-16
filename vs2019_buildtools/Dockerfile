@@ -54,6 +54,26 @@ RUN choco install -y sandcastle
 # Install Bazel
 RUN choco install -y bazel --version 3.1.0
 
+# Install git
+RUN choco install -y git
+
+# Install pywin32 for buildbot-worker
+RUN pip install pywin32
+
+# Install 7zip
+RUN choco install -y 7zip
+
+# Switch to PowerShell
+#SHELL ["powershell", "-command"] 
+
+# Install MSYS2
+#RUN choco install -y msys2 --version 20200602.0.0
+RUN powershell -command Invoke-WebRequest -UserAgent 'DockerCI' -outfile msys2-x86_64-latest.tar.xz http://repo.msys2.org/distrib/msys2-x86_64-latest.tar.xz 
+RUN 7z e msys2-x86_64-latest.tar.xz -Wait
+RUN 7z x msys2-x86_64-latest.tar -o"C:\\" 
+RUN del msys2-x86_64-latest.tar.xz msys2-x86_64-latest.tar
+RUN setx path "%path%;C:\msys64\usr\bin"
+
 # Define the entry point for the docker container.
 # This entry point starts the developer command prompt and launches the PowerShell shell.
 ENTRYPOINT ["powershell.exe", "-NoLogo", "-ExecutionPolicy", "Bypass"]
