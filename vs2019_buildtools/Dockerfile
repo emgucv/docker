@@ -33,12 +33,26 @@ RUN C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache `
     --remove Microsoft.VisualStudio.Component.Windows81SDK `
  || IF "%ERRORLEVEL%"=="3010" EXIT 0
 
-
-
 # Install Chocolatey
 RUN @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
 
-#RUN choco install -y cmake
+# Install python
+RUN choco install -y python
+
+# Install python wheel
+RUN pip install wheel
+
+# Install buildbot-worker
+RUN pip install buildbot-worker
+
+# Install NSIS
+RUN choco install -y nsis
+
+# Install Sandcastle
+RUN choco install -y sandcastle
+
+# Install Bazel
+RUN choco install -y bazel --version 3.1.0
 
 # Define the entry point for the docker container.
 # This entry point starts the developer command prompt and launches the PowerShell shell.
