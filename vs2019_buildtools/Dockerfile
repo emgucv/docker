@@ -75,6 +75,13 @@ RUN 7z e msys2-x86_64-latest.tar.xz -Wait
 RUN 7z x msys2-x86_64-latest.tar -o"C:\\" 
 RUN del msys2-x86_64-latest.tar.xz msys2-x86_64-latest.tar
 RUN setx path "%path%;C:\msys64\usr\bin"
+# First run to setup pacman keys
+RUN c:\msys64\msys2_shell.cmd -defterm -no-start
+# Update all packages
+RUN pacman --noconfirm -Syuu --disable-download-timeout
+
+# Install patch command
+RUN pacman --noconfirm -S patch 
 
 # Define the entry point for the docker container.
 # This entry point starts the developer command prompt and launches the PowerShell shell.
