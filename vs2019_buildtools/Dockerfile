@@ -14,6 +14,8 @@ ADD https://aka.ms/vs/16/release/vs_buildtools.exe C:\TEMP\vs_buildtools.exe
 RUN C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache `
     --installPath C:\BuildTools `
     --add Microsoft.VisualStudio.Workload.AzureBuildTools `
+	--add Microsoft.Net.Component.4.6.1.TargetingPack `
+	--add Microsoft.Net.ComponentGroup.4.6.1.DeveloperTools `
 	--add Microsoft.VisualStudio.Workload.ManagedDesktopBuildTools `
 	--add Microsoft.VisualStudio.Workload.MSBuildTools `
 	--add Microsoft.VisualStudio.Workload.NetCoreBuildTools `
