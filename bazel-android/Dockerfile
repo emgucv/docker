@@ -38,3 +38,7 @@ RUN mkdir /tmp/build_output
 # Set the Environment Variable for the DOTNET CLI HOME PATH
 ARG dotnet_cli_home_arg=/tmp/
 ENV DOTNET_CLI_HOME=$dotnet_cli_home_arg
+
+# Install emsdk
+RUN git clone https://github.com/emscripten-core/emsdk.git
+RUN emsdk/emsdk install latest
