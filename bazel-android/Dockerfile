@@ -42,3 +42,6 @@ ENV DOTNET_CLI_HOME=$dotnet_cli_home_arg
 # Install emsdk
 RUN git clone https://github.com/emscripten-core/emsdk.git
 RUN emsdk/emsdk install latest
+# Added permission for none-root user to use emsdk
+RUN chmod -R ug+rw emsdk
+RUN chmod -R a+rw emsdk/upstream/emscripten/cache
