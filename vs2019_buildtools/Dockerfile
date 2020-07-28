@@ -68,7 +68,8 @@ RUN choco install -y git
 RUN choco install -y 7zip
 
 # Install CUDA
-RUN choco install -y cuda --version  11.0.2
+# Chocolatey failed to install cuda. Disabling for now.
+#RUN choco install -y cuda --version  11.0.2
 
 # Switch to PowerShell
 #SHELL ["powershell", "-command"] 
