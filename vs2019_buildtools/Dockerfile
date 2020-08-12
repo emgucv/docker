@@ -9,7 +9,6 @@ SHELL ["cmd", "/S", "/C"]
 # Download the Build Tools bootstrapper.
 ADD https://aka.ms/vs/16/release/vs_buildtools.exe C:\TEMP\vs_buildtools.exe
 
-
 # Install Build Tools with the Microsoft.VisualStudio.Workload.AzureBuildTools workload, excluding workloads and components with known issues.
 RUN C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache `
     --installPath C:\BuildTools `
@@ -47,6 +46,12 @@ RUN pip install wheel
 # Install buildbot-worker
 RUN pip install buildbot-worker
 
+# Install pywin32 for buildbot-worker
+RUN pip install pywin32
+
+# Install numpy
+RUN pip install numpy
+
 # Install NSIS
 RUN choco install -y nsis
 
@@ -59,11 +64,12 @@ RUN choco install -y bazel --version 3.1.0
 # Install git
 RUN choco install -y git
 
-# Install pywin32 for buildbot-worker
-RUN pip install pywin32
-
 # Install 7zip
 RUN choco install -y 7zip
+
+# Install CUDA
+# Chocolatey failed to install cuda. Disabling for now.
+#RUN choco install -y cuda --version  11.0.2
 
 # Switch to PowerShell
 #SHELL ["powershell", "-command"] 
