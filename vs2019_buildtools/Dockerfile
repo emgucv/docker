@@ -7,7 +7,9 @@ FROM mcr.microsoft.com/dotnet/framework/sdk:4.8-windowsservercore-ltsc2019
 SHELL ["cmd", "/S", "/C"]
 
 # Download the Build Tools bootstrapper.
-ADD https://aka.ms/vs/16/release/vs_buildtools.exe C:\TEMP\vs_buildtools.exe
+# list of available vs2019 buildtools can be found here:
+# https://docs.microsoft.com/en-us/visualstudio/releases/2019/history#release-dates-and-build-numbers
+ADD https://download.visualstudio.microsoft.com/download/pr/067fd8d0-753e-4161-8780-dfa3e577839e/4776935864d08e66183acd5b3647c9616da989c60afbfe100d4afc459f7e5785/vs_BuildTools.exe C:\TEMP\vs_buildtools.exe
 
 # Install Build Tools with the Microsoft.VisualStudio.Workload.AzureBuildTools workload, excluding workloads and components with known issues.
 RUN C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache `
@@ -58,9 +60,6 @@ RUN choco install -y nsis
 # Install Sandcastle
 RUN choco install -y sandcastle
 
-# Install Bazel
-RUN choco install -y bazel --version 3.1.0
-
 # Install git
 RUN choco install -y git
 
@@ -88,6 +87,9 @@ RUN pacman --noconfirm -Syuu --disable-download-timeout
 
 # Install patch command
 RUN pacman --noconfirm -S patch 
+
+# Install Bazel
+# RUN choco install -y bazel --version 3.1.0
 
 # Define the entry point for the docker container.
 # This entry point starts the developer command prompt and launches the PowerShell shell.
