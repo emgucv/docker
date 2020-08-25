@@ -10,4 +10,4 @@ RUN del cuda_11.0.3_451.82_win10.exe
 
 # Copy CUDNN
 ARG copy_dst="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.0/"
-COPY cuda\* ${copy_dst}
+COPY cuda\ ${copy_dst}
