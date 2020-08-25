@@ -66,10 +66,6 @@ RUN choco install -y git
 # Install 7zip
 RUN choco install -y 7zip
 
-# Install CUDA
-# Chocolatey failed to install cuda. Disabling for now.
-#RUN choco install -y cuda --version  11.0.2
-
 # Switch to PowerShell
 #SHELL ["powershell", "-command"] 
 
@@ -87,9 +83,6 @@ RUN pacman --noconfirm -Syuu --disable-download-timeout
 
 # Install patch command
 RUN pacman --noconfirm -S patch 
-
-# Install Bazel
-# RUN choco install -y bazel --version 3.1.0
 
 # Define the entry point for the docker container.
 # This entry point starts the developer command prompt and launches the PowerShell shell.

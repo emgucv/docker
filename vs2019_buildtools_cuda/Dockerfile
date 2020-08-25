@@ -32,3 +32,6 @@ RUN ["C:/Program Files (x86)/Android/android-sdk/tools/bin/sdkmanager.bat", "ndk
 
 #update android sdk
 RUN ["C:/Program Files (x86)/Android/android-sdk/tools/bin/sdkmanager.bat", "--update"]
+
+#install cmake
+RUN choco install -y cmake
