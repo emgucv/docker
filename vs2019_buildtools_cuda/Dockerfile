@@ -35,3 +35,9 @@ RUN ["C:/Program Files (x86)/Android/android-sdk/tools/bin/sdkmanager.bat", "--u
 
 #install cmake
 RUN choco install -y cmake
+
+#install zip 
+RUN pacman --noconfirm -S zip
+
+#install unzip 
+RUN pacman --noconfirm -S unzip
