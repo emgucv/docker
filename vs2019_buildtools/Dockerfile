@@ -6,38 +6,118 @@ FROM mcr.microsoft.com/dotnet/framework/sdk:4.8-windowsservercore-ltsc2019
 # Restore the default Windows shell for correct batch processing.
 SHELL ["cmd", "/S", "/C"]
 
+# Copy our Install script.
+COPY Install.cmd C:\TEMP\
+
+# Download collect.exe in case of an install failure.
+ADD https://aka.ms/vscollect.exe C:\TEMP\collect.exe
+
 # Download the Build Tools bootstrapper.
 # list of available vs2019 buildtools can be found here:
 # https://docs.microsoft.com/en-us/visualstudio/releases/2019/history#release-dates-and-build-numbers
-ADD https://download.visualstudio.microsoft.com/download/pr/067fd8d0-753e-4161-8780-dfa3e577839e/4776935864d08e66183acd5b3647c9616da989c60afbfe100d4afc459f7e5785/vs_BuildTools.exe C:\TEMP\vs_buildtools.exe
+ADD https://download.visualstudio.microsoft.com/download/pr/9c25c0a6-ae72-4043-8f03-c9fd6dffc6e6/fb9ade53e6a5bf5ffce278fa38f33eace8a9068ca6aab79a3a0dec4411625e86/vs_BuildTools.exe C:\TEMP\vs_buildtools.exe
 
-# Install Build Tools with the Microsoft.VisualStudio.Workload.AzureBuildTools workload, excluding workloads and components with known issues.
-RUN C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache `
-    --installPath C:\BuildTools `
-    --add Microsoft.VisualStudio.Workload.AzureBuildTools `
-	--add Microsoft.Net.Component.4.6.1.TargetingPack `
-	--add Microsoft.Net.ComponentGroup.4.6.1.DeveloperTools `
-	--add Microsoft.VisualStudio.Workload.ManagedDesktopBuildTools `
-	--add Microsoft.VisualStudio.Workload.MSBuildTools `
-	--add Microsoft.VisualStudio.Workload.NetCoreBuildTools `
-	--add Microsoft.VisualStudio.Workload.UniversalBuildTools `
-	--add Microsoft.VisualStudio.Workload.VCTools `
-	--add Microsoft.VisualStudio.Component.VC.CMake.Project `
-	--add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 `
-	--add Microsoft.VisualStudio.ComponentGroup.UWP.VC.BuildTools `
-	--add Microsoft.VisualStudio.Component.Windows10SDK.18362 `
-	--add Microsoft.Net.Component.4.8.SDK `
-	--add Microsoft.VisualStudio.Workload.XamarinBuildTools `
-	--add Component.Android.SDK28 `
-	--add Component.OpenJDK `
-    --remove Microsoft.VisualStudio.Component.Windows10SDK.10240 `
-    --remove Microsoft.VisualStudio.Component.Windows10SDK.10586 `
-    --remove Microsoft.VisualStudio.Component.Windows10SDK.14393 `
-    --remove Microsoft.VisualStudio.Component.Windows81SDK `
- || IF "%ERRORLEVEL%"=="3010" EXIT 0
+# Install Build Tools
+RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache 
+
+# Install Build Tools
+RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache --add Microsoft.VisualStudio.Workload.VCTools
+
+# Install Build Tools
+RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache --add Microsoft.VisualStudio.Workload.MSBuildTools
+
+# Install Build Tools
+RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache --add Microsoft.VisualStudio.Workload.AzureBuildTools 
+
+# Install Build Tools
+RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache --add Microsoft.VisualStudio.Workload.ManagedDesktopBuildTools
+
+# Install Build Tools
+RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache --add Microsoft.VisualStudio.Workload.NetCoreBuildTools
+
+# Install Build Tools
+RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache --add Microsoft.VisualStudio.Workload.UniversalBuildTools
+
+# Install Build Tools
+RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache --add Microsoft.VisualStudio.Workload.XamarinBuildTools
+
+# Install Build Tools
+RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64
+
+# Install Build Tools
+RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache --add Microsoft.VisualStudio.Component.VC.v141.x86.x64
+
+# Install Build Tools
+RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache --add Microsoft.VisualStudio.Component.VC.140
+
+# Install Build Tools
+RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache --add Microsoft.VisualStudio.Component.VC.CMake.Project
+
+# Install Build Tools
+RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache --add Microsoft.VisualStudio.ComponentGroup.UWP.VC.BuildTools
+
+# Install Build Tools
+RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache --add Microsoft.VisualStudio.Component.Windows10SDK.18362
+
+# Install Build Tools
+RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache --add Microsoft.Net.Component.4.8.SDK
+
+# Install Build Tools
+RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache --add Microsoft.Net.ComponentGroup.4.6.1.DeveloperTools
+
+# Install Build Tools
+RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache --add Microsoft.Net.Component.4.6.1.TargetingPack
+
+# Install Build Tools
+RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache --add Component.OpenJDK
+
+# Install Build Tools
+RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache --add Component.Android.SDK28
+
+#Setup JAVA_HOME. 
+ENV JAVA_HOME="C:\Program Files\Android\jdk\microsoft_dist_openjdk_1.8.0.25"
 
 # Install Chocolatey
 RUN @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+
+# Install 7zip
+RUN choco install -y 7zip
+
+# Install MSYS2
+RUN powershell -command Invoke-WebRequest -UserAgent 'DockerCI' -outfile msys2-x86_64-latest.tar.xz http://repo.msys2.org/distrib/msys2-x86_64-latest.tar.xz 
+RUN 7z e msys2-x86_64-latest.tar.xz -Wait
+RUN 7z x msys2-x86_64-latest.tar -o"C:\\" 
+RUN del msys2-x86_64-latest.tar.xz msys2-x86_64-latest.tar
+RUN setx path "%path%;C:\msys64\usr\bin"
+# First run to setup pacman keys
+RUN c:\msys64\msys2_shell.cmd -defterm -no-start
+# Update all packages
+RUN pacman --noconfirm -Syuu --disable-download-timeout
+
+# Install patch command
+RUN pacman --noconfirm -S patch 
+
+#install zip 
+RUN pacman --noconfirm -S zip
+
+#install unzip 
+RUN pacman --noconfirm -S unzip
+
+#Accept ANDROID SDK licenses
+RUN mkdir "C:\Program Files (x86)\Android\android-sdk\licenses"
+RUN printf "\n601085b94cd77f0b54ff86406957099ebe79c4d6" > "C:\Program Files (x86)\Android\android-sdk\licenses\android-googletv-license"
+RUN printf "\n859f317696f67ef3d7f30a50a5560e7834b43903" > "C:\Program Files (x86)\Android\android-sdk\licenses\android-sdk-arm-dbt-license"
+RUN printf "\n24333f8a63b6825ea9c5514f83c2829b004d1fee" > "C:\Program Files (x86)\Android\android-sdk\licenses\android-sdk-license"
+RUN printf "\n84831b9409646a918e30573bab4c9c91346d8abd" > "C:\Program Files (x86)\Android\android-sdk\licenses\android-sdk-preview-license"
+RUN printf "\n33b6a2b64607f11b759f320ef9dff4ae5c47d97a" > "C:\Program Files (x86)\Android\android-sdk\licenses\google-gdk-license"
+RUN printf "\nd975f751698a77b662f1254ddbeed3901e976f5a" > "C:\Program Files (x86)\Android\android-sdk\licenses\intel-android-extra-license"
+RUN printf "\ne9acab5b5fbb560a72cfaecce8946896ff6aab9d" > "C:\Program Files (x86)\Android\android-sdk\licenses\mips-android-sysimage-license"
+
+#Install NDK
+RUN ["C:/Program Files (x86)/Android/android-sdk/tools/bin/sdkmanager.bat", "ndk-bundle"]
+
+#update android sdk
+RUN ["C:/Program Files (x86)/Android/android-sdk/tools/bin/sdkmanager.bat", "--update"]
 
 # Install python
 RUN choco install -y python
@@ -63,27 +143,12 @@ RUN choco install -y sandcastle
 # Install git
 RUN choco install -y git
 
-# Install 7zip
-RUN choco install -y 7zip
+#install cmake
+RUN choco install -y cmake
 
 # Switch to PowerShell
 #SHELL ["powershell", "-command"] 
 
-# Install MSYS2
-#RUN choco install -y msys2 --version 20200602.0.0
-RUN powershell -command Invoke-WebRequest -UserAgent 'DockerCI' -outfile msys2-x86_64-latest.tar.xz http://repo.msys2.org/distrib/msys2-x86_64-latest.tar.xz 
-RUN 7z e msys2-x86_64-latest.tar.xz -Wait
-RUN 7z x msys2-x86_64-latest.tar -o"C:\\" 
-RUN del msys2-x86_64-latest.tar.xz msys2-x86_64-latest.tar
-RUN setx path "%path%;C:\msys64\usr\bin"
-# First run to setup pacman keys
-RUN c:\msys64\msys2_shell.cmd -defterm -no-start
-# Update all packages
-RUN pacman --noconfirm -Syuu --disable-download-timeout
-
-# Install patch command
-RUN pacman --noconfirm -S patch 
-
 # Define the entry point for the docker container.
 # This entry point starts the developer command prompt and launches the PowerShell shell.
-ENTRYPOINT ["powershell.exe", "-NoLogo", "-ExecutionPolicy", "Bypass"]
+#ENTRYPOINT ["powershell.exe", "-NoLogo", "-ExecutionPolicy", "Bypass"]
