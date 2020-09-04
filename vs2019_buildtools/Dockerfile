@@ -146,6 +146,16 @@ RUN choco install -y git
 #install cmake
 RUN choco install -y cmake
 
+#add missing dlls to run html help workshop on ltsc2019 container
+COPY itss.dll C:\Windows\SysWOW64\itss.dll
+COPY itircl.dll C:\Windows\SysWOW64\itircl.dll
+
+RUN C:\Windows\SysWOW64\regsvr32.exe /s C:\Windows\SysWOW64\itss.dll
+RUN C:\Windows\SysWOW64\regsvr32.exe /s C:\Windows\SysWOW64\itircl.dll
+
+#install emacs
+RUN pacman --noconfirm -S emacs
+
 # Switch to PowerShell
 #SHELL ["powershell", "-command"] 
 

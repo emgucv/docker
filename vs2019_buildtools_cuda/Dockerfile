@@ -12,3 +12,9 @@ RUN del cuda_11.0.3_451.82_win10.exe
 # Need to download and extract CUDA DNN into the cuda folder first
 ARG copy_dst="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.0/"
 COPY cuda\ ${copy_dst}
+
+# Copy Video Codec SDK
+# Need to download and extract Video Codec SDK first
+ARG copy_dst="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/Video_Codec_SDK_10.0.26"
+COPY Video_Codec_SDK_10.0.26 ${copy_dst}
+
