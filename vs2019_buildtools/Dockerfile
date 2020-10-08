@@ -113,14 +113,20 @@ RUN printf "\n33b6a2b64607f11b759f320ef9dff4ae5c47d97a" > "C:\Program Files (x86
 RUN printf "\nd975f751698a77b662f1254ddbeed3901e976f5a" > "C:\Program Files (x86)\Android\android-sdk\licenses\intel-android-extra-license"
 RUN printf "\ne9acab5b5fbb560a72cfaecce8946896ff6aab9d" > "C:\Program Files (x86)\Android\android-sdk\licenses\mips-android-sysimage-license"
 
-#Install NDK
-RUN ["C:/Program Files (x86)/Android/android-sdk/tools/bin/sdkmanager.bat", "ndk-bundle"]
-
 #update android sdk
 RUN ["C:/Program Files (x86)/Android/android-sdk/tools/bin/sdkmanager.bat", "--update"]
 
+#Install NDK
+RUN ["C:/Program Files (x86)/Android/android-sdk/tools/bin/sdkmanager.bat", "ndk-bundle"]
+
+#Install android 30
+RUN ["C:/Program Files (x86)/Android/android-sdk/tools/bin/sdkmanager.bat", "platforms;android-30"]
+
+#Install android build-tools 30
+RUN ["C:/Program Files (x86)/Android/android-sdk/tools/bin/sdkmanager.bat", "build-tools;30.0.2"]
+
 # Install python
-RUN choco install -y python
+RUN choco install -y python --version=3.8.6
 
 # Install python wheel
 RUN pip install wheel
