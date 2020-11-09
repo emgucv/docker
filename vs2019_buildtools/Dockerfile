@@ -162,6 +162,11 @@ RUN C:\Windows\SysWOW64\regsvr32.exe /s C:\Windows\SysWOW64\itircl.dll
 #install emacs
 RUN pacman --noconfirm -S emacs
 
+# Copy NSIS ExecDocs plugin
+# Need to download and extract NSIS ExecDocs plugin first
+ARG execdos_dst="C:/Program Files (x86)/NSIS/Plugins/"
+COPY ExecDos\Plugins ${execdos_dst}
+
 # Switch to PowerShell
 #SHELL ["powershell", "-command"] 
 
