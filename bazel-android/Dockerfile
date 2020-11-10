@@ -26,12 +26,12 @@ RUN apt -y install dotnet-sdk-3.1 aspnetcore-runtime-3.1
 
 RUN apt -y install bazel=3.1.0
 
-RUN wget https://dl.google.com/android/repository/commandlinetools-linux-6609375_latest.zip -P /var/lib
-RUN unzip /var/lib/commandlinetools-linux-6609375_latest.zip -d /var/lib
-RUN yes | /var/lib/tools/bin/sdkmanager --sdk_root=/usr/lib/android-sdk --licenses
-RUN /var/lib/tools/bin/sdkmanager --sdk_root=/usr/lib/android-sdk --update
-RUN /var/lib/tools/bin/sdkmanager --sdk_root=/usr/lib/android-sdk "ndk;20.1.5948944"
-RUN /var/lib/tools/bin/sdkmanager --sdk_root=/usr/lib/android-sdk "platforms;android-23"
+RUN wget https://dl.google.com/android/repository/commandlinetools-linux-6609375_latest.zip -P /var/lib/android-sdk
+RUN unzip /var/lib/android-sdk/commandlinetools-linux-6609375_latest.zip -o -d /var/lib/android-sdk
+RUN yes | /var/lib/android-sdk/tools/bin/sdkmanager --sdk_root=/usr/lib/android-sdk --licenses
+RUN /var/lib/android-sdk/tools/bin/sdkmanager --sdk_root=/usr/lib/android-sdk --update
+RUN /var/lib/android-sdk/tools/bin/sdkmanager --sdk_root=/usr/lib/android-sdk "ndk-bundle"
+RUN /var/lib/android-sdk/tools/bin/sdkmanager --sdk_root=/usr/lib/android-sdk "platforms;android-30"
 
 RUN mkdir /tmp/build_output
 
