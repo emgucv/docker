@@ -20,11 +20,6 @@ RUN apt -y install openjdk-8-jdk
 RUN apt -y install python3-numpy python3-pip python3-future python-is-python3
 RUN apt -y install android-sdk
 RUN apt -y install build-essential cmake git protobuf-compiler libprotobuf-dev
-RUN apt -y upgrade
-
-RUN apt -y install dotnet-sdk-3.1 aspnetcore-runtime-3.1
-
-RUN apt -y install bazel=3.7.0
 
 RUN wget https://dl.google.com/android/repository/commandlinetools-linux-6609375_latest.zip -P /var/lib/android-sdk
 RUN unzip -o /var/lib/android-sdk/commandlinetools-linux-6609375_latest.zip -d /var/lib/android-sdk
@@ -32,6 +27,12 @@ RUN yes | /var/lib/android-sdk/tools/bin/sdkmanager --sdk_root=/usr/lib/android-
 RUN /var/lib/android-sdk/tools/bin/sdkmanager --sdk_root=/usr/lib/android-sdk --update
 RUN /var/lib/android-sdk/tools/bin/sdkmanager --sdk_root=/usr/lib/android-sdk "ndk-bundle"
 RUN /var/lib/android-sdk/tools/bin/sdkmanager --sdk_root=/usr/lib/android-sdk "platforms;android-30"
+
+RUN apt -y upgrade
+
+RUN apt -y install dotnet-sdk-5.0 aspnetcore-runtime-5.0
+
+RUN apt -y install bazel=3.7.0
 
 RUN mkdir /tmp/build_output
 
