@@ -1,7 +1,7 @@
 # escape=`
 
-# Use the latest Windows Server Core image with .NET Framework 4.8.
-FROM mcr.microsoft.com/dotnet/framework/sdk:4.8-windowsservercore-ltsc2019
+# Use the latest Windows Server Core image with .NET Framework 5.0
+FROM mcr.microsoft.com/dotnet/sdk:5.0-windowsservercore-ltsc2019
 
 # Restore the default Windows shell for correct batch processing.
 SHELL ["cmd", "/S", "/C"]
@@ -15,7 +15,7 @@ ADD https://aka.ms/vscollect.exe C:\TEMP\collect.exe
 # Download the Build Tools bootstrapper.
 # list of available vs2019 buildtools can be found here:
 # https://docs.microsoft.com/en-us/visualstudio/releases/2019/history#release-dates-and-build-numbers
-ADD https://download.visualstudio.microsoft.com/download/pr/9c25c0a6-ae72-4043-8f03-c9fd6dffc6e6/fb9ade53e6a5bf5ffce278fa38f33eace8a9068ca6aab79a3a0dec4411625e86/vs_BuildTools.exe C:\TEMP\vs_buildtools.exe
+ADD https://download.visualstudio.microsoft.com/download/pr/9b3476ff-6d0a-4ff8-956d-270147f21cd4/0df5becfebf4ae2418f5fae653feebf3888b0af00d3df0415cb64875147e9be3/vs_BuildTools.exe C:\TEMP\vs_buildtools.exe
 
 # Install Build Tools
 RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache 
@@ -61,6 +61,9 @@ RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --n
 
 # Install Build Tools
 RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache --add Microsoft.Net.Component.4.8.SDK
+
+# Install Build Tools
+RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache --add Microsoft.NetCore.Component.Runtime.5.0
 
 # Install Build Tools
 RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache --add Microsoft.Net.ComponentGroup.4.6.1.DeveloperTools
