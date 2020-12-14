@@ -123,7 +123,7 @@ RUN ["C:/Program Files (x86)/Android/android-sdk/tools/bin/sdkmanager.bat", "ndk
 RUN ["C:/Program Files (x86)/Android/android-sdk/tools/bin/sdkmanager.bat", "platforms;android-30"]
 
 #Install android build-tools 30
-RUN ["C:/Program Files (x86)/Android/android-sdk/tools/bin/sdkmanager.bat", "build-tools;30.0.2"]
+RUN ["C:/Program Files (x86)/Android/android-sdk/tools/bin/sdkmanager.bat", "build-tools;30.0.3"]
 
 # Install python
 RUN choco install -y python --version=3.8.6
