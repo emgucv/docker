@@ -34,6 +34,9 @@ RUN apt -y install dotnet-sdk-5.0 aspnetcore-runtime-5.0
 
 RUN apt -y install bazel=3.7.0
 
+# Install the lsb-release package to help identify platform.
+RUN apt -y install lsb-release
+
 RUN mkdir /tmp/build_output
 
 # Set the Environment Variable for the DOTNET CLI HOME PATH
