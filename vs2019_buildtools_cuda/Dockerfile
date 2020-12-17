@@ -1,7 +1,7 @@
 # escape=`
 
 # Use the latest vs2019 buildtools
-FROM emgu/vs2019_buildtools:latest
+FROM emgu/vs2019_buildtools:16.8.30804.86
 
 # Install CUDA
 RUN powershell -command Invoke-WebRequest -UserAgent 'DockerCI' -outfile cuda_11.1.1_456.81_win10.exe https://developer.download.nvidia.com/compute/cuda/11.1.1/local_installers/cuda_11.1.1_456.81_win10.exe
