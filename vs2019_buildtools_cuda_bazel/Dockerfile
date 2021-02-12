@@ -4,4 +4,4 @@
 FROM emgu/vs2019_buildtools_cuda_openvino:openvino_2021.2.185
 
 # Install Bazel
-RUN choco install -y bazel --version 3.7.0
+RUN choco install -y bazel --version 4.0.0

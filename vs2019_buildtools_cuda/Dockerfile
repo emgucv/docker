@@ -15,6 +15,8 @@ COPY cuda\ ${copy_dst}
 
 # Copy Video Codec SDK
 # Need to download and extract Video Codec SDK first
-ARG copy_dst="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/Video_Codec_SDK_10.0.26"
-COPY Video_Codec_SDK_10.0.26 ${copy_dst}
+ARG cuda_include_dst="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.1/include/"
+COPY Video_Codec_SDK_11.0.10\Interface\ ${cuda_include_dst}
+ARG cuda_bin_dst="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.1/lib/"
+COPY Video_Codec_SDK_11.0.10\Lib\ ${cuda_bin_dst}
 
