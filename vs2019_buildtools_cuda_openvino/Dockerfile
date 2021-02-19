@@ -14,7 +14,7 @@ RUN powershell.exe -Command Start-Process 'w_openvino_toolkit_p_2021.2.185.exe' 
 RUN del w_openvino_toolkit_p_2021.2.185.exe
 
 # Copy MediaFeaturePack
-# Need to download openvino installer first
+# Need to download MediaFeaturePack installer first: https://www.microsoft.com/en-us/software-download/mediafeaturepack
 COPY Windows_MediaFeaturePack_x64_1903_V1.msu Windows_MediaFeaturePack_x64_1903_V1.msu
 
 # Install MediaFeaturePack
