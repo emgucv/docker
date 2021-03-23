@@ -17,7 +17,7 @@ RUN wget https://download.visualstudio.microsoft.com/download/pr/1958def3-0dac-4
 RUN mkdir -p bazel
 
 #Download from https://github.com/koenvervloesem/bazel-on-arm/tree/master/patches
-RUN cd bazel;wget https://github.com/koenvervloesem/bazel-on-arm/raw/master/patches/bazel-4.0.0-arm.patch;wget https://github.com/bazelbuild/bazel/releases/download/4.0.0/bazel-4.0.0-dist.zip;unzip bazel-4.0.0-dist.zip;patch -p1 < bazel-4.0.0-arm.patch;env EXTRA_BAZEL_ARGS="--host_javabase=@local_jdk//:jdk" bash ./compile.sh;cd ..;cp /bazel/output/bazel /usr/local/sbin/
+RUN cd bazel;wget https://github.com/koenvervloesem/bazel-on-arm/raw/master/patches/bazel-4.0.0-arm.patch;wget https://github.com/bazelbuild/bazel/releases/download/4.0.0/bazel-4.0.0-dist.zip;unzip bazel-4.0.0-dist.zip;patch -p1 < bazel-4.0.0-arm.patch;env EXTRA_BAZEL_ARGS="--host_javabase=@local_jdk//:jdk" BAZEL_JAVAC_OPTS="-J-Xms384m -J-Xmx800m" JAVA_TOOL_OPTS="-Xmx800m" bash ./compile.sh;cd ..;cp /bazel/output/bazel /usr/local/sbin/
 
 RUN rm -rf bazel
 
