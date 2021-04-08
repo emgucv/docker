@@ -49,3 +49,6 @@ RUN emsdk/emsdk install latest
 # Added permission for none-root user to use emsdk
 RUN chmod -R ug+rw emsdk
 RUN chmod -R a+rw emsdk/upstream/emscripten/cache
+
+# Install packages for building Emgu CV
+RUN apt-get -y install libgtk-3-dev libgstreamer1.0-dev libavcodec-dev libswscale-dev libavformat-dev libdc1394-22-dev libv4l-dev cmake-curses-gui ocl-icd-dev freeglut3-dev libgeotiff-dev libusb-1.0-0-dev
