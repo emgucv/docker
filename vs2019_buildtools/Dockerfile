@@ -165,6 +165,9 @@ RUN C:\Windows\SysWOW64\regsvr32.exe /s C:\Windows\SysWOW64\itircl.dll
 #install emacs
 RUN pacman --noconfirm -S emacs
 
+#install perl
+RUN pacman --noconfirm -S perl
+
 # Copy NSIS ExecDocs plugin
 # Need to download and extract NSIS ExecDocs plugin first
 ARG execdos_dst="C:/Program Files (x86)/NSIS/Plugins/"
