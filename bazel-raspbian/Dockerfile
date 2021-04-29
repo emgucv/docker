@@ -11,7 +11,7 @@ RUN apt -y upgrade
 
 #Add dotnet repo
 RUN mkdir -p /usr/local/sbin 
-RUN wget https://download.visualstudio.microsoft.com/download/pr/1958def3-0dac-4243-8fb9-e906a7f14509/93af2ac9a973d60c7d2ebd168d752a92/dotnet-sdk-5.0.201-linux-arm.tar.gz;tar -zxvf dotnet-sdk-5.0.201-linux-arm.tar.gz -C /usr/local/sbin;rm dotnet-sdk-5.0.201-linux-arm.tar.gz
+RUN wget https://download.visualstudio.microsoft.com/download/pr/fada9b0c-202a-4720-817b-b8b92dddad99/fa6ace43156b7f73e5f7fb3cdfb5c302/dotnet-sdk-5.0.202-linux-arm.tar.gz;tar -zxvf dotnet-sdk-5.0.202-linux-arm.tar.gz -C /usr/local/sbin;rm dotnet-sdk-5.0.202-linux-arm.tar.gz
 
 #Build bazel from source 
 RUN mkdir -p bazel
