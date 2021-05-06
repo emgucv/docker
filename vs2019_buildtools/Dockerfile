@@ -1,7 +1,8 @@
 # escape=`
 
 # Use the latest Windows Server Core image with .NET Framework 5.0
-FROM mcr.microsoft.com/dotnet/sdk:5.0-windowsservercore-ltsc2019
+#FROM mcr.microsoft.com/dotnet/sdk:5.0-windowsservercore-ltsc2019
+FROM mcr.microsoft.com/windows:10.0.19042.928-amd64
 
 # Restore the default Windows shell for correct batch processing.
 SHELL ["cmd", "/S", "/C"]
@@ -15,7 +16,8 @@ ADD https://aka.ms/vscollect.exe C:\TEMP\collect.exe
 # Download the Build Tools bootstrapper.
 # list of available vs2019 buildtools can be found here:
 # https://docs.microsoft.com/en-us/visualstudio/releases/2019/history#release-dates-and-build-numbers
-ADD https://download.visualstudio.microsoft.com/download/pr/9b3476ff-6d0a-4ff8-956d-270147f21cd4/0df5becfebf4ae2418f5fae653feebf3888b0af00d3df0415cb64875147e9be3/vs_BuildTools.exe C:\TEMP\vs_buildtools.exe
+# using 16.9.4 (Apr 13, 2021)
+ADD https://download.visualstudio.microsoft.com/download/pr/3105fcfe-e771-41d6-9a1c-fc971e7d03a7/e0c2f5b63918562fd959049e12dffe64bf46ec2e89f7cadde3214921777ce5c2/vs_BuildTools.exe C:\TEMP\vs_buildtools.exe
 
 # Install Build Tools
 RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache 
@@ -56,11 +58,8 @@ RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --n
 # Install Build Tools
 RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache --add Microsoft.VisualStudio.ComponentGroup.UWP.VC.BuildTools
 
-# Install Build Tools
-RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache --add Microsoft.VisualStudio.Component.Windows10SDK.18362
-
-# Install Build Tools
-RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache --add Microsoft.Net.Component.4.8.SDK
+# Install Build Tools, included in Microsoft.VisualStudio.Workload.AzureBuildTools 
+#RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache --add Microsoft.Net.Component.4.8.SDK
 
 # Install Build Tools
 RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache --add Microsoft.NetCore.Component.Runtime.5.0
@@ -75,7 +74,10 @@ RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --n
 RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache --add Component.OpenJDK
 
 # Install Build Tools
-RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache --add Component.Android.SDK28
+RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache --add Microsoft.VisualStudio.Component.Windows10SDK.19041
+
+# Install Build Tools
+RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache --add Component.Android.SDK30
 
 #Setup JAVA_HOME. 
 ENV JAVA_HOME="C:\Program Files\Android\jdk\microsoft_dist_openjdk_1.8.0.25"
@@ -87,7 +89,8 @@ RUN @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -I
 RUN choco install -y 7zip
 
 # Install MSYS2
-RUN powershell -command Invoke-WebRequest -UserAgent 'DockerCI' -outfile msys2-x86_64-latest.tar.xz http://repo.msys2.org/distrib/msys2-x86_64-latest.tar.xz 
+#RUN powershell -command Invoke-WebRequest -UserAgent 'DockerCI' -outfile msys2-x86_64-latest.tar.xz http://repo.msys2.org/distrib/msys2-x86_64-latest.tar.xz 
+ADD http://repo.msys2.org/distrib/msys2-x86_64-latest.tar.xz msys2-x86_64-latest.tar.xz
 RUN 7z e msys2-x86_64-latest.tar.xz -Wait
 RUN 7z x msys2-x86_64-latest.tar -o"C:\\" 
 RUN del msys2-x86_64-latest.tar.xz msys2-x86_64-latest.tar
@@ -98,7 +101,7 @@ RUN c:\msys64\msys2_shell.cmd -defterm -no-start
 RUN pacman --noconfirm -Syuu --disable-download-timeout
 
 # Install patch command
-RUN pacman --noconfirm -S patch 
+RUN pacman --noconfirm -Sy patch 
 
 #install zip 
 RUN pacman --noconfirm -S zip
@@ -129,7 +132,7 @@ RUN ["C:/Program Files (x86)/Android/android-sdk/tools/bin/sdkmanager.bat", "pla
 RUN ["C:/Program Files (x86)/Android/android-sdk/tools/bin/sdkmanager.bat", "build-tools;30.0.3"]
 
 # Install python
-RUN choco install -y python --version=3.8.6
+RUN choco install -y python --version=3.8.10
 
 # Install python wheel
 RUN pip install wheel
@@ -155,23 +158,28 @@ RUN choco install -y git
 #install cmake
 RUN choco install -y cmake
 
-#add missing dlls to run html help workshop on ltsc2019 container
-COPY itss.dll C:\Windows\SysWOW64\itss.dll
-COPY itircl.dll C:\Windows\SysWOW64\itircl.dll
-
-RUN C:\Windows\SysWOW64\regsvr32.exe /s C:\Windows\SysWOW64\itss.dll
-RUN C:\Windows\SysWOW64\regsvr32.exe /s C:\Windows\SysWOW64\itircl.dll
-
 #install emacs
 RUN pacman --noconfirm -S emacs
 
 #install perl
 RUN pacman --noconfirm -S perl
 
+#add missing dlls to run html help workshop on ltsc2019 container
+#COPY itss.dll C:\Windows\SysWOW64\itss.dll
+#COPY itircl.dll C:\Windows\SysWOW64\itircl.dll
+#RUN C:\Windows\SysWOW64\regsvr32.exe /s C:\Windows\SysWOW64\itss.dll
+#RUN C:\Windows\SysWOW64\regsvr32.exe /s C:\Windows\SysWOW64\itircl.dll
+
 # Copy NSIS ExecDocs plugin
 # Need to download and extract NSIS ExecDocs plugin first
 ARG execdos_dst="C:/Program Files (x86)/NSIS/Plugins/"
 COPY ExecDos\Plugins ${execdos_dst}
+
+# Copy MediaFeaturePack
+# Need to download MediaFeaturePack installer first: https://www.microsoft.com/en-us/software-download/mediafeaturepack
+# Expand the package using the command "expand -F:* .\Windows_MediaFeaturePack_x64_1903_V1.msu .\"
+#COPY Windows_MediaFeaturePack_x64_1903_V1.msu Windows_MediaFeaturePack_x64_1903_V1.msu
+#COPY microsoft-windows-mediafeaturepack-oob-package~31bf3856ad364e35~amd64~~.cab microsoft-windows-mediafeaturepack-oob-package~31bf3856ad364e35~amd64~~.cab
 
 # Switch to PowerShell
 #SHELL ["powershell", "-command"] 
