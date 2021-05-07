@@ -22,6 +22,9 @@ RUN cd bazel;wget https://github.com/koenvervloesem/bazel-on-arm/raw/master/patc
 
 RUN rm -rf bazel
 
+#Add packages required to build emgu cv
+RUN DEBIAN_FRONTEND="noninterative" apt -y install libopengl-dev
+
 # Set the Environment Variable for the DOTNET CLI HOME PATH
 ARG dotnet_cli_home_arg=/tmp/
 ENV DOTNET_CLI_HOME=$dotnet_cli_home_arg
