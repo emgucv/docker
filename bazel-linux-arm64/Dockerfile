@@ -1,10 +1,14 @@
-FROM debian:stable
+#FROM debian:stable
+FROM ubuntu:20.04
 
-RUN apt update
+ENV TZ=America/New_York
+
+RUN DEBIAN_FRONTEND="noninterative" apt update
 
 #Add packages required to install bazel and dotnet repo
-RUN apt -y install curl wget gnupg apt-transport-https python3-numpy python3-pip python3-future git openjdk-11-jdk zip unzip python build-essential cmake git protobuf-compiler libprotobuf-dev libusb-1.0-0-dev libgeotiff-dev
-RUN apt -y upgrade
+RUN DEBIAN_FRONTEND="noninterative" apt -y install curl wget gnupg apt-transport-https python3-numpy python3-pip python3-future git openjdk-11-jdk zip unzip python build-essential cmake git protobuf-compiler libprotobuf-dev libusb-1.0-0-dev libgeotiff-dev
+
+RUN DEBIAN_FRONTEND="noninterative" apt -y upgrade
 
 #Add dotnet repo
 RUN mkdir -p /usr/local/sbin 
