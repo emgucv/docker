@@ -25,3 +25,13 @@ RUN rm -rf bazel
 ARG dotnet_cli_home_arg=/tmp/
 ENV DOTNET_CLI_HOME=$dotnet_cli_home_arg
 
+RUN apt install lsb-release
+
+#Add debian buster-backports repo
+COPY buster-backports.list /etc/apt/sources.list.d/
+RUN apt update
+
+#Install latest version of CMake from buster-backports
+RUN apt install cmake/buster-backports
+
+
