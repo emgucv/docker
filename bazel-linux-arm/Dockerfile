@@ -1,13 +1,10 @@
-#FROM balenalib/raspberrypi3-debian:latest
-#FROM homeassistant/raspberrypi4-homeassistant
-
 FROM debian:stable
 
 RUN apt update
+RUN apt -y upgrade
 
 #Add packages required to install bazel and dotnet repo
-RUN apt -y install curl wget gnupg apt-transport-https python3-numpy python3-pip python3-future git openjdk-11-jdk zip unzip python build-essential cmake git protobuf-compiler libprotobuf-dev libusb-1.0-0-dev libgeotiff-dev
-RUN apt -y upgrade
+RUN apt -y install curl wget gnupg apt-transport-https python3-numpy python3-pip python3-future git openjdk-11-jdk zip unzip python build-essential cmake git protobuf-compiler libprotobuf-dev libusb-1.0-0-dev libgeotiff-dev freeglut3-dev lsb-release
 
 #Add dotnet repo
 RUN mkdir -p /usr/local/sbin 
@@ -24,8 +21,6 @@ RUN rm -rf bazel
 # Set the Environment Variable for the DOTNET CLI HOME PATH
 ARG dotnet_cli_home_arg=/tmp/
 ENV DOTNET_CLI_HOME=$dotnet_cli_home_arg
-
-RUN apt -y install lsb-release
 
 #Add debian buster-backports repo
 COPY buster-backports.list /etc/apt/sources.list.d/
