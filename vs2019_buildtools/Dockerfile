@@ -178,6 +178,9 @@ RUN pacman --noconfirm -S perl
 ARG execdos_dst="C:/Program Files (x86)/NSIS/Plugins/"
 COPY ExecDos\Plugins ${execdos_dst}
 
+#Add nuget.org to dotnet nuget repo
+RUN dotnet nuget add source https://api.nuget.org/v3/index.json -n nuget.org
+
 # Copy MediaFeaturePack
 # Need to download MediaFeaturePack installer first: https://www.microsoft.com/en-us/software-download/mediafeaturepack
 # Expand the package using the command "expand -F:* .\Windows_MediaFeaturePack_x64_1903_V1.msu .\"
