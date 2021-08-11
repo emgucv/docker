@@ -2,7 +2,7 @@
 
 # Use the latest Windows Server Core image with .NET Framework 5.0
 #FROM mcr.microsoft.com/dotnet/sdk:5.0-windowsservercore-ltsc2019
-FROM mcr.microsoft.com/windows:10.0.19042.928-amd64
+FROM mcr.microsoft.com/windows:10.0.19042.1165-amd64
 
 # Restore the default Windows shell for correct batch processing.
 SHELL ["cmd", "/S", "/C"]
@@ -16,8 +16,8 @@ ADD https://aka.ms/vscollect.exe C:\TEMP\collect.exe
 # Download the Build Tools bootstrapper.
 # list of available vs2019 buildtools can be found here:
 # https://docs.microsoft.com/en-us/visualstudio/releases/2019/history#release-dates-and-build-numbers
-# using 16.9.4 (Apr 13, 2021)
-ADD https://download.visualstudio.microsoft.com/download/pr/3105fcfe-e771-41d6-9a1c-fc971e7d03a7/e0c2f5b63918562fd959049e12dffe64bf46ec2e89f7cadde3214921777ce5c2/vs_BuildTools.exe C:\TEMP\vs_buildtools.exe
+# using 16.11.0 (Aug 10, 2021)
+ADD https://download.visualstudio.microsoft.com/download/pr/45dfa82b-c1f8-4c27-a5a0-1fa7a864ae21/75e7f5779a42dddabc647af82a7eae4bf1417484f0cd1ac9e8fd87cbe7450c39/vs_BuildTools.exe C:\TEMP\vs_buildtools.exe
 
 # Install Build Tools
 RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache 
@@ -158,6 +158,9 @@ RUN choco install -y git
 #install cmake
 RUN choco install -y cmake
 
+#install dependency walker
+RUN choco install -y dependencywalker
+
 #install emacs
 RUN pacman --noconfirm -S emacs
 
@@ -174,6 +177,9 @@ RUN pacman --noconfirm -S perl
 # Need to download and extract NSIS ExecDocs plugin first
 ARG execdos_dst="C:/Program Files (x86)/NSIS/Plugins/"
 COPY ExecDos\Plugins ${execdos_dst}
+
+#Add nuget.org to dotnet nuget repo
+RUN dotnet nuget add source https://api.nuget.org/v3/index.json -n nuget.org
 
 # Copy MediaFeaturePack
 # Need to download MediaFeaturePack installer first: https://www.microsoft.com/en-us/software-download/mediafeaturepack
