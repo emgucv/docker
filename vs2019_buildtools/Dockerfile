@@ -58,9 +58,6 @@ RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --n
 # Install Build Tools
 RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache --add Microsoft.VisualStudio.ComponentGroup.UWP.VC.BuildTools
 
-# Install Build Tools, included in Microsoft.VisualStudio.Workload.AzureBuildTools 
-#RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache --add Microsoft.Net.Component.4.8.SDK
-
 # Install Build Tools
 RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache --add Microsoft.NetCore.Component.Runtime.5.0
 
@@ -180,6 +177,12 @@ COPY ExecDos\Plugins ${execdos_dst}
 
 #Add nuget.org to dotnet nuget repo
 RUN dotnet nuget add source https://api.nuget.org/v3/index.json -n nuget.org
+
+# Install .netframework 4.8, needed by sandcastle
+RUN C:\TEMP\Install.cmd C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache --add Microsoft.Net.Component.4.8.SDK Microsoft.Net.ComponentGroup.4.8.DeveloperTools Microsoft.Net.Component.4.8.TargetingPack
+
+# Enable cimwin32 powershell (needed for class Win32_Process, used by CodeQL Analysis)
+RUN mofcomp %windir%\system32\wbem\cimwin32.mof
 
 # Copy MediaFeaturePack
 # Need to download MediaFeaturePack installer first: https://www.microsoft.com/en-us/software-download/mediafeaturepack
