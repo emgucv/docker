@@ -32,7 +32,7 @@ RUN apt -y upgrade
 
 RUN apt -y install dotnet-sdk-5.0 aspnetcore-runtime-5.0
 
-RUN apt -y install bazel=4.0.0
+RUN apt -y install bazel=4.1.0
 
 # Install the lsb-release package to help identify platform.
 RUN apt -y install lsb-release
