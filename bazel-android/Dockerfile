@@ -26,7 +26,9 @@ RUN unzip -o /var/lib/android-sdk/commandlinetools-linux-6609375_latest.zip -d /
 RUN yes | /var/lib/android-sdk/tools/bin/sdkmanager --sdk_root=/usr/lib/android-sdk --licenses
 RUN /var/lib/android-sdk/tools/bin/sdkmanager --sdk_root=/usr/lib/android-sdk --update
 RUN /var/lib/android-sdk/tools/bin/sdkmanager --sdk_root=/usr/lib/android-sdk "ndk-bundle"
-RUN /var/lib/android-sdk/tools/bin/sdkmanager --sdk_root=/usr/lib/android-sdk "platforms;android-30"
+RUN /var/lib/android-sdk/tools/bin/sdkmanager --sdk_root=/usr/lib/android-sdk --install "ndk;21.4.7075529"
+#RUN /var/lib/android-sdk/tools/bin/sdkmanager --sdk_root=/usr/lib/android-sdk "platforms;android-30"
+RUN /var/lib/android-sdk/tools/bin/sdkmanager --sdk_root=/usr/lib/android-sdk "platforms;android-31"
 
 RUN apt -y upgrade
 
