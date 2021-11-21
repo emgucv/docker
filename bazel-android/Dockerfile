@@ -37,7 +37,7 @@ RUN apt -y install dotnet-sdk-6.0 aspnetcore-runtime-6.0
 RUN apt -y install bazel=4.2.1
 
 # Install the lsb-release package to help identify platform.
-RUN apt -y install lsb-release
+RUN apt -y install lsb-release 
 
 RUN mkdir /tmp/build_output
 
@@ -53,4 +53,7 @@ RUN chmod -R ug+rw emsdk
 RUN chmod -R a+rw emsdk/upstream/emscripten/cache
 
 # Install packages for building Emgu CV
-RUN apt-get -y install libgtk-3-dev libgstreamer1.0-dev libavcodec-dev libswscale-dev libavformat-dev libdc1394-22-dev libv4l-dev cmake-curses-gui ocl-icd-dev freeglut3-dev libgeotiff-dev libusb-1.0-0-dev
+RUN apt-get -y install libgtk-3-dev libgstreamer1.0-dev libavcodec-dev libswscale-dev libavformat-dev libdc1394-22-dev libv4l-dev cmake-curses-gui ocl-icd-dev freeglut3-dev libgeotiff-dev libusb-1.0-0-dev 
+
+# Install packages needed by bazel when compiling tensorflow
+RUN apt-get -y install llvm
