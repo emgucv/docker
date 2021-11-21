@@ -101,13 +101,16 @@ RUN c:\msys64\msys2_shell.cmd -defterm -no-start
 RUN pacman --noconfirm -Syuu --disable-download-timeout
 
 # Install patch command
-RUN pacman --noconfirm -Sy patch 
+RUN pacman --noconfirm -Sy patch ed
 
-#install zip 
-RUN pacman --noconfirm -S zip
+#install zip & unzip
+RUN pacman --noconfirm -S zip unzip
 
-#install unzip 
-RUN pacman --noconfirm -S unzip
+#install emacs
+RUN pacman --noconfirm -S emacs
+
+#install perl
+RUN pacman --noconfirm -S perl
 
 #Accept ANDROID SDK licenses
 RUN mkdir "C:\Program Files (x86)\Android\android-sdk\licenses"
@@ -132,7 +135,7 @@ RUN ["C:/Program Files (x86)/Android/android-sdk/tools/bin/sdkmanager.bat", "pla
 RUN ["C:/Program Files (x86)/Android/android-sdk/tools/bin/sdkmanager.bat", "build-tools;30.0.3"]
 
 # Install python
-RUN choco install -y python --version=3.8.10
+RUN choco install -y python --version=3.10.0
 
 # Install python wheel
 RUN pip install wheel
@@ -160,12 +163,6 @@ RUN choco install -y cmake
 
 #install dependency walker
 RUN choco install -y dependencywalker
-
-#install emacs
-RUN pacman --noconfirm -S emacs
-
-#install perl
-RUN pacman --noconfirm -S perl
 
 #add missing dlls to run html help workshop on ltsc2019 container
 #COPY itss.dll C:\Windows\SysWOW64\itss.dll
