@@ -1,0 +1,2 @@
+#!/bin/bash -v
+docker build -t emgu/bazel-android .
