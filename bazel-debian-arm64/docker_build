@@ -1,2 +1,2 @@
 #!/bin/bash -v
-docker build -t emgu/bazel-linux-arm .
+docker build -t emgu/bazel-debian-arm64 .
