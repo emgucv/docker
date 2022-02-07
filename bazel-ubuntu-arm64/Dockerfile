@@ -12,7 +12,8 @@ RUN DEBIAN_FRONTEND="noninterative" apt -y upgrade
 
 #Add dotnet repo
 RUN mkdir -p /usr/local/sbin 
-RUN wget https://download.visualstudio.microsoft.com/download/pr/c1f15b51-5e8c-4e6c-a803-241790159af3/b5cbcc59f67089d760e0ed4a714c47ed/dotnet-sdk-5.0.202-linux-arm64.tar.gz;tar -zxvf dotnet-sdk-5.0.202-linux-arm64.tar.gz -C /usr/local/sbin;rm dotnet-sdk-5.0.202-linux-arm64.tar.gz
+RUN wget https://download.visualstudio.microsoft.com/download/pr/d43345e2-f0d7-4866-b56e-419071f30ebe/68debcece0276e9b25a65ec5798cf07b/dotnet-sdk-6.0.101-linux-arm64.tar.gz;tar -zxvf dotnet-sdk-6.0.101-linux-arm64.tar.gz -C /usr/local/sbin;rm dotnet-sdk-6.0.101-linux-arm64.tar.gz
+
 
 #Build bazel from source 
 RUN mkdir -p bazel

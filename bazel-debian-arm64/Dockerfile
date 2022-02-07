@@ -8,7 +8,7 @@ RUN apt -y install curl wget gnupg apt-transport-https python3-numpy python3-pip
 
 #Add dotnet repo
 RUN mkdir -p /usr/local/sbin 
-RUN wget https://download.visualstudio.microsoft.com/download/pr/1f85b038-9917-4d0a-8485-5dc86510eec7/a7555924fe292c6c2140893f066abe65/dotnet-sdk-6.0.100-linux-arm.tar.gz;tar -zxvf dotnet-sdk-6.0.100-linux-arm.tar.gz -C /usr/local/sbin;rm dotnet-sdk-6.0.100-linux-arm.tar.gz
+RUN wget https://download.visualstudio.microsoft.com/download/pr/d43345e2-f0d7-4866-b56e-419071f30ebe/68debcece0276e9b25a65ec5798cf07b/dotnet-sdk-6.0.101-linux-arm64.tar.gz;tar -zxvf dotnet-sdk-6.0.101-linux-arm64.tar.gz -C /usr/local/sbin;rm dotnet-sdk-6.0.101-linux-arm64.tar.gz
 
 #Build bazel from source 
 RUN mkdir -p bazel
