@@ -1,0 +1,2 @@
+#!/bin/bash -v
+docker buildx build --platform linux/arm/v7 -t emgu/bazel-debian-arm .
