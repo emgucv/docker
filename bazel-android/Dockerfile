@@ -16,7 +16,7 @@ RUN dpkg -i packages-microsoft-prod.deb
 
 RUN apt update
 
-RUN apt -y install openjdk-8-jdk
+RUN apt -y install openjdk-17-jdk
 RUN apt -y install python3-numpy python3-pip python3-future python-is-python3
 RUN apt -y install android-sdk
 RUN apt -y install build-essential cmake git protobuf-compiler libprotobuf-dev

@@ -4,7 +4,7 @@ RUN apt update
 RUN apt -y upgrade
 
 #Add packages required to install bazel and dotnet repo
-RUN apt -y install curl wget gnupg apt-transport-https python3-numpy python3-pip python3-future git openjdk-11-jdk zip unzip python build-essential cmake git protobuf-compiler libprotobuf-dev libusb-1.0-0-dev libgeotiff-dev freeglut3-dev lsb-release
+RUN apt -y install curl wget gnupg apt-transport-https python3-numpy python3-pip python3-future git openjdk-17-jdk zip unzip python build-essential cmake git protobuf-compiler libprotobuf-dev libusb-1.0-0-dev libgeotiff-dev freeglut3-dev lsb-release
 
 #Add dotnet repo
 RUN mkdir -p /usr/local/sbin 
