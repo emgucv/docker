@@ -15,6 +15,13 @@ RUN DEBIAN_FRONTEND="noninterative" apt -y install zip
 RUN mkdir -p /var/lib/buildbot/masters/master/public_html
 RUN ln -s /var/lib/buildbot/masters/master/public_html /var/www/html/buildbot
 
+#Install clamav
+RUN DEBIAN_FRONTEND="noninterative" apt -y install clamav clamav-daemon
+
+#update ClamAV signature database
+#RUN systemctl stop clamav-freshclam
+RUN freshclam
+#RUN systemctl start clamav-freshclam
 
 
 
