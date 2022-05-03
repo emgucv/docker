@@ -34,8 +34,6 @@ RUN apt -y upgrade
 
 RUN apt -y install dotnet-sdk-6.0 aspnetcore-runtime-6.0
 
-RUN apt -y install bazel=4.2.2
-
 # Install the lsb-release package to help identify platform.
 RUN apt -y install lsb-release 
 
@@ -57,3 +55,6 @@ RUN apt-get -y install libgtk-3-dev libgstreamer1.0-dev libavcodec-dev libswscal
 
 # Install packages needed by bazel when compiling tensorflow
 RUN apt-get -y install llvm
+
+# Install bazel
+RUN apt -y install bazel=5.0.0
