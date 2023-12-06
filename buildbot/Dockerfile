@@ -23,5 +23,6 @@ RUN DEBIAN_FRONTEND="noninterative" apt -y install clamav clamav-daemon
 RUN freshclam
 #RUN systemctl start clamav-freshclam
 
-
+#Install git
+RUN DEBIAN_FRONTEND="noninterative" apt -y install git
 
