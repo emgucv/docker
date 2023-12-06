@@ -63,3 +63,6 @@ RUN DEBIAN_FRONTEND="noninterative" apt -y install build-essential libgtk-3-dev 
 # Install packages needed by bazel when compiling tensorflow
 RUN DEBIAN_FRONTEND="noninterative" apt-get -y install llvm
 
+# Install packages needed by bazel when compiling tensorflow
+RUN DEBIAN_FRONTEND="noninterative" apt-get -y install buildbot-worker
+RUN rm -rf /usr/lib/buildbot/workers/worker
