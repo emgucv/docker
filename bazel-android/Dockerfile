@@ -5,10 +5,15 @@ RUN apt update
 #Add basic packages required to install bazel and dotnet repo
 RUN apt -y install curl wget gnupg apt-transport-https
 
-#Add bazel repo
-COPY bazel.list /etc/apt/sources.list.d/bazel.list
-RUN wget https://bazel.build/bazel-release.pub.gpg 
-RUN apt-key add bazel-release.pub.gpg
+#Add bazelisk 
+RUN wget https://github.com/bazelbuild/bazelisk/releases/download/v1.19.0/bazelisk-linux-amd64
+#RUN mkdir -p /usr/local/sbin
+RUN chmod a+x bazelisk-linux-amd64
+RUN mv bazelisk-linux-amd64 /usr/local/sbin
+RUN ln -s /usr/local/sbin/bazelisk-linux-amd64 /usr/local/sbin/bazel
+#RUN echo $PATH
+ENV PATH="${PATH}:/usr/local/sbin"
+RUN bazel --version
 
 #Add dotnet repo
 RUN wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb 
@@ -32,7 +37,7 @@ RUN /var/lib/android-sdk/cmdline-tools/bin/sdkmanager --sdk_root=/usr/lib/androi
 
 RUN apt -y upgrade
 
-RUN apt -y install dotnet-sdk-6.0 aspnetcore-runtime-6.0
+RUN apt -y install dotnet-sdk-8.0 aspnetcore-runtime-8.0
 
 # Install the lsb-release package to help identify platform.
 RUN apt -y install lsb-release 
@@ -50,11 +55,11 @@ RUN emsdk/emsdk install latest
 RUN chmod -R ug+rw emsdk
 RUN chmod -R a+rw emsdk/upstream/emscripten/cache
 
+ENV TZ=America/New_York
+
 # Install packages for building Emgu CV
-RUN apt-get -y install libgtk-3-dev libgstreamer1.0-dev libavcodec-dev libswscale-dev libavformat-dev libv4l-dev libdc1394-dev ocl-icd-dev freeglut3-dev libgeotiff-dev libusb-1.0-0-dev 
+RUN DEBIAN_FRONTEND="noninterative" apt -y install build-essential libgtk-3-dev libgstreamer1.0-dev libavcodec-dev libswscale-dev libavformat-dev libdc1394-dev libv4l-dev cmake-curses-gui ocl-icd-dev freeglut3-dev libgeotiff-dev libusb-1.0-0-dev libvtk9-dev libfreetype-dev libharfbuzz-dev qtbase5-dev libeigen3-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libgflags-dev libgoogle-glog-dev libatlas-base-dev liblapacke-dev libva-dev 
 
 # Install packages needed by bazel when compiling tensorflow
-RUN apt-get -y install llvm
+RUN DEBIAN_FRONTEND="noninterative" apt-get -y install llvm
 
-# Install bazel
-RUN apt -y install bazel=5.0.0
