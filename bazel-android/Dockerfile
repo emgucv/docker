@@ -61,8 +61,8 @@ ENV TZ=America/New_York
 RUN DEBIAN_FRONTEND="noninterative" apt -y install build-essential libgtk-3-dev libgstreamer1.0-dev libavcodec-dev libswscale-dev libavformat-dev libdc1394-dev libv4l-dev cmake-curses-gui ocl-icd-dev freeglut3-dev libgeotiff-dev libusb-1.0-0-dev libvtk9-dev libfreetype-dev libharfbuzz-dev qtbase5-dev libeigen3-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libgflags-dev libgoogle-glog-dev libatlas-base-dev liblapacke-dev libva-dev 
 
 # Install packages needed by bazel when compiling tensorflow
-RUN DEBIAN_FRONTEND="noninterative" apt-get -y install llvm
+RUN DEBIAN_FRONTEND="noninterative" apt -y install llvm
 
 # Install packages needed by bazel when compiling tensorflow
-RUN DEBIAN_FRONTEND="noninterative" apt-get -y install buildbot-worker
+RUN DEBIAN_FRONTEND="noninterative" apt -y install buildbot-worker
 RUN rm -rf /usr/lib/buildbot/workers/worker
