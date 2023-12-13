@@ -66,3 +66,6 @@ RUN DEBIAN_FRONTEND="noninterative" apt -y install llvm
 # Install packages needed by bazel when compiling tensorflow
 RUN DEBIAN_FRONTEND="noninterative" apt -y install buildbot-worker
 RUN rm -rf /usr/lib/buildbot/workers/worker
+
+# Install doxygen for compiling documentation
+RUN apt -y install doxygen texlive-latex-base texlive-latex-extra
