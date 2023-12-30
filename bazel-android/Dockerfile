@@ -26,7 +26,7 @@ RUN apt -y install python3-numpy python3-pip python3-future python-is-python3
 RUN apt -y install android-sdk
 RUN apt -y install build-essential cmake cmake-curses-gui git protobuf-compiler libprotobuf-dev
 
-RUN wget https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip -P /var/lib/android-sdk
+RUN wget https://dl.google.com/android/repository/commandlinetools-linux-10406996_latest.zip -P /var/lib/android-sdk
 RUN unzip -o /var/lib/android-sdk/commandlinetools-linux-8092744_latest.zip -d /var/lib/android-sdk
 RUN yes | /var/lib/android-sdk/cmdline-tools/bin/sdkmanager --sdk_root=/usr/lib/android-sdk --licenses
 RUN /var/lib/android-sdk/cmdline-tools/bin/sdkmanager --sdk_root=/usr/lib/android-sdk --update
