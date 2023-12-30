@@ -32,6 +32,7 @@ RUN yes | /var/lib/android-sdk/cmdline-tools/bin/sdkmanager --sdk_root=/usr/lib/
 RUN /var/lib/android-sdk/cmdline-tools/bin/sdkmanager --sdk_root=/usr/lib/android-sdk --update
 RUN /var/lib/android-sdk/cmdline-tools/bin/sdkmanager --sdk_root=/usr/lib/android-sdk "ndk-bundle"
 RUN /var/lib/android-sdk/cmdline-tools/bin/sdkmanager --sdk_root=/usr/lib/android-sdk --install "ndk;25.2.9519653"
+RUN /var/lib/android-sdk/cmdline-tools/bin/sdkmanager --sdk_root=/usr/lib/android-sdk --install "ndk;21.4.7075529"
 #RUN /var/lib/android-sdk/cmdline-tools/bin/sdkmanager --sdk_root=/usr/lib/android-sdk "platforms;android-31"
 RUN /var/lib/android-sdk/cmdline-tools/bin/sdkmanager --sdk_root=/usr/lib/android-sdk "platforms;android-32"
 
