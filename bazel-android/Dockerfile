@@ -69,4 +69,7 @@ RUN DEBIAN_FRONTEND="noninterative" apt -y install buildbot-worker
 RUN rm -rf /usr/lib/buildbot/workers/worker
 
 # Install doxygen for compiling documentation
-RUN apt -y install doxygen texlive-latex-base texlive-latex-extra
+RUN DEBIAN_FRONTEND="noninterative" apt -y install doxygen texlive-latex-base texlive-latex-extra texlive-font-utils
+
+# Install packages needed to convert image format for release package
+RUN DEBIAN_FRONTEND="noninterative" apt -y install imagemagick-6.q16
