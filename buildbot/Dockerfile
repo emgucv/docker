@@ -26,3 +26,6 @@ RUN freshclam
 #Install git
 RUN DEBIAN_FRONTEND="noninterative" apt -y install git
 
+#Install zsh
+RUN DEBIAN_FRONTEND="noninterative" apt -y install zsh
+
