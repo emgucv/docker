@@ -14,6 +14,6 @@ RUN dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.n
 RUN yum install -y mg
 
 # install opencv dependencies 
-RUN yum install -y libpng-devel libwebp-devel libjpeg-turbo-devel mesa-libGL libtiff-devel dotnet-sdk-8.0
+RUN yum install -y libpng-devel libwebp-devel libjpeg-turbo-devel mesa-libGL libtiff-devel dotnet-sdk-8.0 mono-core mono-complete
 
 ENV OPENSSL_ENABLE_SHA1_SIGNATURES=1
