@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi9/ubi:9.3-1552
+FROM registry.access.redhat.com/ubi9:9.7-1771346757
 
 RUN yum update -y
 
@@ -14,6 +14,6 @@ RUN dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.n
 RUN yum install -y mg
 
 # install opencv dependencies 
-RUN yum install -y libpng-devel libwebp-devel libjpeg-turbo-devel mesa-libGL libtiff-devel dotnet-sdk-8.0 mono-core mono-complete
+RUN yum install -y libpng-devel libwebp-devel libjpeg-turbo-devel mesa-libGL libtiff-devel dotnet-sdk-10.0 mono-core mono-complete
 
 ENV OPENSSL_ENABLE_SHA1_SIGNATURES=1
