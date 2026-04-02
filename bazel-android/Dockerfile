@@ -38,7 +38,7 @@ RUN /var/lib/android-sdk/cmdline-tools/bin/sdkmanager --sdk_root=/usr/lib/androi
 
 RUN apt -y upgrade
 
-RUN apt -y install dotnet-sdk-8.0 aspnetcore-runtime-8.0
+RUN apt -y install dotnet-sdk-10.0 aspnetcore-runtime-10.0
 
 # Install the lsb-release package to help identify platform.
 RUN apt -y install lsb-release 
