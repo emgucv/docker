@@ -6,7 +6,7 @@ RUN apt update
 RUN apt -y install curl wget gnupg apt-transport-https
 
 #Add bazelisk 
-RUN wget https://github.com/bazelbuild/bazelisk/releases/download/v1.20.0/bazelisk-linux-amd64
+RUN wget https://github.com/bazelbuild/bazelisk/releases/download/v1.28.1/bazelisk-linux-amd64
 #RUN mkdir -p /usr/local/sbin
 RUN chmod a+x bazelisk-linux-amd64
 RUN mv bazelisk-linux-amd64 /usr/local/sbin
@@ -36,7 +36,7 @@ RUN /var/lib/android-sdk/cmdline-tools/bin/sdkmanager --sdk_root=/usr/lib/androi
 #RUN /var/lib/android-sdk/cmdline-tools/bin/sdkmanager --sdk_root=/usr/lib/android-sdk "platforms;android-31"
 RUN /var/lib/android-sdk/cmdline-tools/bin/sdkmanager --sdk_root=/usr/lib/android-sdk "platforms;android-32"
 
-RUN apt -y upgrade
+RUN apt-get clean && apt -y upgrade
 
 RUN apt -y install dotnet-sdk-10.0 aspnetcore-runtime-10.0
 
@@ -48,13 +48,6 @@ RUN mkdir /tmp/build_output
 # Set the Environment Variable for the DOTNET CLI HOME PATH
 ARG dotnet_cli_home_arg=/tmp/
 ENV DOTNET_CLI_HOME=$dotnet_cli_home_arg
-
-# Install emsdk
-RUN git clone https://github.com/emscripten-core/emsdk.git
-RUN emsdk/emsdk install latest
-# Added permission for none-root user to use emsdk
-RUN chmod -R ug+rw emsdk
-RUN chmod -R a+rw emsdk/upstream/emscripten/cache
 
 ENV TZ=America/New_York
 
@@ -72,4 +65,7 @@ RUN rm -rf /usr/lib/buildbot/workers/worker
 RUN DEBIAN_FRONTEND="noninterative" apt -y install doxygen texlive-latex-base texlive-latex-extra texlive-font-utils
 
 # Install packages needed to convert image format for release package
-RUN DEBIAN_FRONTEND="noninterative" apt -y install imagemagick-6.q16
+RUN DEBIAN_FRONTEND="noninterative" apt-get clean && apt -y install imagemagick-6.q16
+
+# Install wasmtools for Emgu CV web assembly build
+RUN dotnet workload install wasm-tools
